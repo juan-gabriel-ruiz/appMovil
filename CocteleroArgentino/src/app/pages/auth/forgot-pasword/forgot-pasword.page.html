@@ -1,0 +1,41 @@
+<!-- componente compartido del header -->
+<app-header title="Recuperar contraseña"></app-header>
+
+<ion-content >
+
+  <div class="d-flex-center">
+    
+    <!-- el submit(), va a llamar a dicha funcion cuando se envie el formulario, y en el caso de keypress.enter significa que si estamos en pc al apretar enter se va a ejecutar el metodo submit -->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+      <!-- componente compartido del logo -->
+      <app-logo></app-logo>
+
+      <p class="ion-text-center">Te enviaremos un email para restablecer tu contraseña</p>
+
+      <!-- seccion email -->
+      <app-custom-input
+      autocomplete="email"
+      icon="mail-outline"
+      [control]="form.controls.email"
+      type="email"
+      label="Correo"
+      ></app-custom-input>
+
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de correo y el campo ha sido tocado-->
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']"> El correo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']"> Ingrese un correo valido</div>
+      </div>
+
+      <!-- boton para ejecutar metodo submit-->
+      <ion-button  expand="block"  mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+        Recuperar
+        <ion-icon slot="end" name="arrow-fordward"></ion-icon>
+      </ion-button>
+  
+    </form>
+
+  </div>
+  
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "appVuelo",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

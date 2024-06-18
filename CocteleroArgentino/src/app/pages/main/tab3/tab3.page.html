@@ -1,0 +1,31 @@
+<!-- Componente compartido header-->
+<app-header title="Trago Aleatorio"></app-header>
+
+<ion-content>
+  <!-- BOTON QUE LLAMA A LA FUNCION QUE BRINDA UN TRAGO RANDOM -->
+  <ion-button expand="full" (click)="getRandomCocktail()"> Trago Aleatorio </ion-button>
+  <!-- muestra el div solo si la variable cocktail tiene un valor -->
+  <div *ngIf="cocktail" style="text-align: center;">
+    <!-- card que muestra nombre, instrucciones y foto del trago -->
+    <ion-card>
+      <ion-img [src]="cocktail.strDrinkThumb" ></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ cocktail.strDrink }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ cocktail.strInstructions }}</p>
+      </ion-card-content>
+    </ion-card>
+    <!-- boton para descargar la informacion de la card-->
+    <ion-button slot="end" (click)="downloadCocktail(cocktail)">
+      Descargar
+    </ion-button>
+  </div>
+  <!-- BOTON PARA CERRAR SESIÓN -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="singOut()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>

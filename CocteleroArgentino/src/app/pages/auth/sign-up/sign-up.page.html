@@ -1,0 +1,61 @@
+<!-- componente compartido del header -->
+<app-header title="Registro"></app-header>
+
+<ion-content>
+
+  <div class="d-flex-center">
+
+    <!-- el submit(), va a llamar a dicha funcion cuando se envie el formulario, y en el caso de keypress.enter significa que si estamos en pc al apretar enter se va a ejecutar el metodo submit -->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+      <!-- componente compartido del logo -->
+      <app-logo></app-logo>
+
+      <!-- seccion nombre -->
+      <app-custom-input autocomplete="name"
+      icon="person-outline"
+      [control]="form.controls.name"
+      type="text"
+      label="Nombre"></app-custom-input>
+
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de nombre y el campo ha sido tocado-->
+      <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
+        <div *ngIf="form.controls.name.errors?.['required']"> El nombre es requerido</div>
+        <div *ngIf="form.controls.name.errors?.['minlenght']"> el nombre debe tener al menos 4 caracteres</div>
+      </div>
+
+      <!-- seccion email -->
+      <app-custom-input autocomplete="email" icon="mail-outline" [control]="form.controls.email" type="email"
+        label="Correo">
+      </app-custom-input>
+        
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de correo electrónico y el campo ha sido tocado-->
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']"> El correo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']"> Ingrese un correo valido</div>
+      </div>
+
+
+      <!-- seccion contraseña -->
+      <app-custom-input [control]="form.controls.password" 
+      icon="lock-closed-outline"
+      type="password"
+      label="Contraseña"
+      ></app-custom-input>
+
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de contraseña y el campo ha sido tocado-->  
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']"> La contraseña es requerida</div>
+      </div>
+
+      <!-- boton para ejecutar metodo submit -->
+      <ion-button expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+        Registrate
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

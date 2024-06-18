@@ -1,0 +1,61 @@
+<!-- componente compartido del header -->
+<app-header title="Inicio sesion"></app-header>
+
+<ion-content >
+
+  <div class="d-flex-center">
+
+    <!-- el submit(), va a llamar a dicha funcion cuando se envie el formulario, y en el caso de keypress.enter significa que si estamos en pc al apretar enter se va a ejecutar el metodo submit -->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+      <!-- componente compartido del logo -->
+      <app-logo></app-logo>
+
+      <!-- seccion email -->
+      <app-custom-input
+      autocomplete="email"
+      icon="mail-outline"
+      [control]="form.controls.email"
+      type="email" 
+      label="Correo"
+      ></app-custom-input>
+
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de correo electrónico y el campo ha sido tocado-->
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']"> El correo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']"> Ingrese un correo valido</div>
+      </div>
+      
+  <!-- seccion contaseña -->
+      <app-custom-input 
+      [control]="form.controls.password"
+      icon="lock-closed-outline"
+      type="password"
+      label="Contraseña"
+      ></app-custom-input>
+
+      <!-- son los mensajes de error que se muestran si hay errores en el campo de contraseña y el campo ha sido tocado-->    
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']"> La contraseña es requerida</div>
+      </div>
+      
+        <!-- esto nos permite ir a la pestaña para recuperar contraseña -->
+        <p  routerLink="forgot-pasword" class="ion-text-center">¿Olvidaste tu contraseña?</p>
+
+        <!-- boton para ejecutar el metodo submit -->
+        <ion-button  expand="block"  mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+          Ingresar 
+          <ion-icon slot="end" name="log-in-outline"></ion-icon>
+        </ion-button>
+
+        <!-- boton para dirigirnos a la pestaña de registro -->
+        <ion-button class="ion-margin-top" routerLink="sign-up" expand="block"  mode="ios" fill="outline">
+          Registrate
+          <ion-icon slot="end" name="person-add-outline"></ion-icon>
+        </ion-button>
+  
+    </form>
+
+  </div>
+
+</ion-content>

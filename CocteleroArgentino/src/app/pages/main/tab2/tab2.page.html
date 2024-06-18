@@ -1,0 +1,47 @@
+<!-- Componente compartido header-->
+<app-header title="Trago por Nombre"></app-header>
+
+<ion-content>
+
+  <!-- INPUT DONDE SE INGRESA EL NOMBRE DEL TRAGO -->
+  <ion-item>
+    <ion-input [(ngModel)]="name" placeholder="Ingrese el nombre de su trago"></ion-input>
+  </ion-item>
+
+  <!-- BOTON DE BUSCAR -->
+  <ion-button expand="full" (click)="searchByName()">Buscar</ion-button>
+
+  <!-- LISTA QUE MUESTRA NOMBRE DE TRAGO, INSTRUCCIONES Y FOTO -->
+  <ion-list *ngIf="cocktails.length > 0">
+    <ion-item *ngFor="let cocktail of cocktails">
+      <ion-thumbnail slot="start">
+        <img [src]="cocktail.strDrinkThumb" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ cocktail.strDrink }}</h2>
+        <p>{{ cocktail.strInstructions }}</p>
+      </ion-label>
+
+      <!-- BOTON PARA DESCARGAR INSTRUCCIONES -->
+      <ion-button slot="end" (click)="downloadCocktail(cocktail)">
+        Descargar
+      </ion-button>
+      
+    </ion-item>
+  </ion-list>
+
+  <!-- MENSAJE DE ALERTA QUE SE MUESTRA SOLO SI NO SE RELLENA EL INPUT -->
+  <div style="text-align: center;">
+    <ion-text *ngIf="showEmptyNameError" color="danger" >
+      Por favor ingrese un nombre antes de buscar.
+    </ion-text>
+  </div>
+
+  <!-- BOTON PARA CERRAR SESIÓN -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="singOut()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

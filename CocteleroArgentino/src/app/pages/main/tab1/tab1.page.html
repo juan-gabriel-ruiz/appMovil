@@ -1,0 +1,42 @@
+<!-- Componente compartido header-->
+<app-header title="Trago por Ingrediente"></app-header>
+
+<ion-content>
+
+  <!-- INPUT DONDE SE INGRESA EL INGREDIENTE -->
+  <ion-item>
+    <ion-input [(ngModel)]="ingredient" placeholder=" Ingrese su ingrediente "></ion-input>
+  </ion-item>
+
+  <!-- BOTON DE BUSCAR -->
+  <ion-button expand="full" (click)="searchByIngredient()"> Buscar </ion-button>
+
+  <!-- LISTA QUE MUESTRA NOMBRE DE TRAGO Y FOTO -->
+  <ion-list *ngIf="cocktails.length > 0">
+
+    <ion-item *ngFor="let cocktail of cocktails">
+      <ion-thumbnail slot="start">
+        <img [src]="cocktail.strDrinkThumb" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ cocktail.strDrink }}</h2>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+  
+  <!-- MENSAJE DE ALERTA QUE SE MUESTRA SOLO SI NO SE RELLENA EL INPUT -->
+  <div style="text-align: center;">
+    <ion-text *ngIf="showEmptyNameError" color="danger" >
+      Por favor ingrese un ingrediente antes de buscar.
+    </ion-text>
+  </div>
+
+  <!-- BOTON PARA CERRAR SESIÓN -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="singOut()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>
